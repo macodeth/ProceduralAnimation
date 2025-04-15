@@ -9,6 +9,7 @@ static func get_polygon_points(points: PackedVector2Array, tension: float) -> Pa
 	for i in range(len(curve_points) - 3):
 		var tmp := CatmullRom.get_spline_points(curve_points[i], curve_points[i + 1], curve_points[i + 2], curve_points[i + 3], tension)
 		draw_points.append_array(tmp)
+	draw_points.append(points[0])
 	return draw_points
 
 ## Generate all points needed to draw a spline from p1 to p2 (exclude p2)
@@ -28,7 +29,7 @@ static func get_spline_points(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2
 	var draw_points: PackedVector2Array = []
 	while t < 1.0:
 		draw_points.append(a * t * t * t + b * t * t + c * t + d)
-		t += 0.1
+		t += 0.3
 	return draw_points
 
 ## generate 4 knot values based on tension, 
